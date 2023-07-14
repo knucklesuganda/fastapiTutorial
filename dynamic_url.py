@@ -6,26 +6,22 @@ users = []
 
 
 class User(BaseModel):
-    username: str
     email: str
+    username: str
     password: str
 
 
-@app.post("/create_user")
-def create_user_route(new_user: User):
-    users.append(new_user)
-    return {
-        "created": True,
-    }
+@app.post("/")
+def create_user(data: User):
+    users.append(data)
+    return {"created": True}
 
 
-@app.get("/users")
-def get_all_users():
-    return {
-        "users": users,
-    }
+@app.get("/")
+def get_users():
+    return users
 
 
-@app.get("/users/{user_id}")
-def get_user_route(user_id: int):
-    return users[user_id]
+@app.get("/{id}")
+def get_user_by_id(id: int):
+    return users[id]
